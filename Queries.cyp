@@ -37,7 +37,19 @@
         Match (p:Person{name:"Kevin Bacon"})
         return p.born
 
-    
+// Use of Count
+    Match (p:Person)-[r:ACTED_IN]->(m:Movie)
+    Where m.title = "The Matrix" Or p.name = "Tom Hanks"
+    return count(p)
+    //or
+    return count(p) as count_of_person
+
+// Use of Distinct
+    //level filtering in the where clause
+    MATCH (p)-[r:ACTED_IN]->(m)
+    where p:Person AND m:Movie and m.released > 2000
+    return distinct p.name
+    // ditinct return unique values
 
 
      
